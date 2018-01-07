@@ -1,5 +1,7 @@
 package org.packt.swarm.petstore.cart;
 
+import org.packt.swarm.petstore.cart.model.Item;
+
 import javax.inject.Inject;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -7,9 +9,9 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
-import java.util.Map;
+import javax.ws.rs.core.Response;
+import java.util.Collection;
 
 @Path("/")
 public class CartResource {
@@ -18,24 +20,27 @@ public class CartResource {
     private CartService cartService;
 
     @GET
-    @Path("cart/{id}")
+    @Path("cart/{customerId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Map<Integer, Integer> getCart(@PathParam("id") int id) {
-        return cartService.getCart(id);
+    public Response getCart(@PathParam("customerId") String customerId) {
+        Collection<Item> cart = cartService.getCart(customerId);
+        return Response.ok(cart).build();
     }
 
     @POST
-    @Path("cart/{id}")
+    @Path("cart/{customerId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public void addToCart(@PathParam("id") int customerId, @QueryParam("itemId") int itemId, @QueryParam("quantity") int quantity) {
-        cartService.addToCart(customerId, itemId, quantity);
+    public Response addToCart(@PathParam("customerId") String customerId, Item item) {
+        cartService.addToCart(customerId, item);
+        return Response.ok().build();
     }
 
     @DELETE
     @Path("cart/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public void addToCart(@PathParam("id") int customerId, @QueryParam("itemId") int itemId) {
+    public Response addToCart(@PathParam("customerId") String customerId, String itemId) {
         cartService.removeFromCart(customerId, itemId);
+        return Response.ok().build();
     }
 
 }

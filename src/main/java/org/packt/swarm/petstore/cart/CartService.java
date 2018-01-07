@@ -1,16 +1,20 @@
 package org.packt.swarm.petstore.cart;
 
+import org.packt.swarm.petstore.cart.model.Item;
+
 import javax.enterprise.context.ApplicationScoped;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @ApplicationScoped
 public class CartService {
 
-    private Map<Integer, HashMap<Integer,Integer>> carts = new HashMap<>();
+    private Map<String, HashMap<String,Item>> carts = new HashMap<>();
 
-    public Map<Integer,Integer> getCart(int customerId){
-        HashMap<Integer,Integer> cart = carts.get(customerId);
+    private HashMap<String,Item> findCart(String customerId){
+        HashMap<String,Item> cart = carts.get(customerId);
         if(cart == null){
             cart = new HashMap<>();
             carts.put(customerId, cart);
@@ -18,14 +22,19 @@ public class CartService {
         return cart;
     }
 
-    public void addToCart(int customerId, int itemId, int quantity){
-        Map<Integer,Integer> cart = getCart(customerId);
-        cart.put(itemId, quantity);
+    public Collection<Item> getCart(String customerId){
+        Map<String,Item> cart = findCart(customerId);
+        return cart.values();
     }
 
-    public void removeFromCart(int customerId, int itemId){
-        Map<Integer,Integer> cart = getCart(customerId);
-        cart.remove(customerId);
+    public void addToCart(String customerId, Item item){
+        Map<String,Item> cart = findCart(customerId);
+        cart.put(item.getItemId(), item);
+    }
+
+    public void removeFromCart(String customerId, String itemId){
+        Map<String, Item> cart = findCart(customerId);
+        cart.remove(itemId);
     }
 
 }
