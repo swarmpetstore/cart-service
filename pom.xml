@@ -52,6 +52,12 @@
             <artifactId>cdi</artifactId>
             <version>${version.wildfly.swarm}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.packt.book</groupId>
+            <artifactId>cart-service-api</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
     <build>

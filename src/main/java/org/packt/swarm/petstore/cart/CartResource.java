@@ -1,6 +1,6 @@
 package org.packt.swarm.petstore.cart;
 
-import org.packt.swarm.petstore.cart.model.Item;
+import org.packt.swarm.petstore.cart.api.Item;
 
 import javax.inject.Inject;
 import javax.ws.rs.DELETE;

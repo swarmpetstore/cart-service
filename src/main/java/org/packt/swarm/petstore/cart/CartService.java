@@ -1,11 +1,10 @@
 package org.packt.swarm.petstore.cart;
 
-import org.packt.swarm.petstore.cart.model.Item;
+import org.packt.swarm.petstore.cart.api.Item;
 
 import javax.enterprise.context.ApplicationScoped;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @ApplicationScoped
