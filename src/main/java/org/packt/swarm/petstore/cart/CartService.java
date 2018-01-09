@@ -26,9 +26,16 @@ public class CartService {
         return cart.values();
     }
 
-    public void addToCart(String customerId, Item item){
+    public void addToCart(String customerId, Item newItem, boolean additive){
         Map<String,Item> cart = findCart(customerId);
-        cart.put(item.getItemId(), item);
+        final String itemId = newItem.getItemId();
+        if(additive && cart.containsKey(itemId)){
+           Item currentItem = cart.get(itemId);
+           currentItem.setQuantity(currentItem.getQuantity()+newItem.getQuantity());
+           cart.put(itemId, currentItem);
+        } else {
+            cart.put(itemId, newItem);
+        }
     }
 
     public void removeFromCart(String customerId, String itemId){
