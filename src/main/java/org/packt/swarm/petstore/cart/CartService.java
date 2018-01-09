@@ -26,7 +26,7 @@ public class CartService {
         return cart.values();
     }
 
-    public void addToCart(String customerId, Item newItem, boolean additive){
+    public void addItem(String customerId, Item newItem, boolean additive){
         Map<String,Item> cart = findCart(customerId);
         final String itemId = newItem.getItemId();
         if(additive && cart.containsKey(itemId)){
@@ -38,7 +38,7 @@ public class CartService {
         }
     }
 
-    public void removeFromCart(String customerId, String itemId){
+    public void deleteItem(String customerId, String itemId){
         Map<String, Item> cart = findCart(customerId);
         cart.remove(itemId);
     }

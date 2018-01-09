@@ -31,16 +31,16 @@ public class CartResource {
     @POST
     @Path("cart/{customerId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response addToCart(@PathParam("customerId") String customerId, Item item, @QueryParam("additive") boolean additive) {
-        cartService.addToCart(customerId, item, additive);
+    public Response addItem(@PathParam("customerId") String customerId, Item item, @QueryParam("additive") boolean additive) {
+        cartService.addItem(customerId, item, additive);
         return Response.ok().build();
     }
 
     @DELETE
-    @Path("cart/{id}")
+    @Path("cart/{customerId}/{itemId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response addToCart(@PathParam("customerId") String customerId, String itemId) {
-        cartService.removeFromCart(customerId, itemId);
+    public Response deleteItem(@PathParam("customerId") String customerId, @PathParam("itemId") String itemId) {
+        cartService.deleteItem(customerId, itemId);
         return Response.ok().build();
     }
 
