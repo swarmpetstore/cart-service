@@ -32,6 +32,7 @@ public class CartResource {
     @Path("cart/{customerId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response addItem(@PathParam("customerId") String customerId, Item item, @QueryParam("additive") boolean additive) {
+        System.out.println("IDZIE ADD TO CART");
         cartService.addItem(customerId, item, additive);
         return Response.ok().build();
     }
