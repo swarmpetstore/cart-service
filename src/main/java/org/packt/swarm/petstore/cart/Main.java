@@ -18,8 +18,8 @@ public class Main {
 
     private static void secureDeployment(final Archive<?> deployment){
         deployment.as(Secured.class)
-                .protect( "/cart/item" )
-                .withMethod( "POST" )
+                .protect( "/cart/*" )
+                .withMethod( "POST","GET","DELETE")
                 .withRole( "customer" );
     }
 }

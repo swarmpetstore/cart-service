@@ -24,7 +24,9 @@ public class CartResource {
     @Path("cart/{customerId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCart(@PathParam("customerId") String customerId) {
+        System.out.println("IDZIE GET CART");
         Collection<Item> cart = cartService.getCart(customerId);
+        System.out.println("ZWRADCAM CARTA "+cart);
         return Response.ok(cart).build();
     }
 
